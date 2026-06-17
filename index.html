@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hotkey Forge — Master AoE II Hotkeys</title>
+<meta name="description" content="Forge your macro. A hyper-slick training ground for mastering Age of Empires II: Definitive Edition hotkeys — drills, reaction timing, mastery ranks." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0c0a08;
+  --bg-2:#15110c;
+  --panel:rgba(28,22,15,.72);
+  --panel-solid:#1b150e;
+  --stroke:rgba(212,175,55,.22);
+  --stroke-strong:rgba(212,175,55,.55);
+  --gold:#e8c372;
+  --gold-bright:#ffdf91;
+  --gold-deep:#c79a3b;
+  --ink:#f3e9d2;
+  --ink-dim:#b6a888;
+  --ink-faint:#7c715a;
+  --crimson:#c0392b;
+  --crimson-soft:#e06155;
+  --green:#5fc77a;
+  --green-soft:#7ee098;
+  --blue:#6cb8e6;
+  --shadow:0 24px 60px -20px rgba(0,0,0,.85);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+#ember{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(1100px 700px at 78% -8%, rgba(192,57,43,.16), transparent 60%),
+    radial-gradient(900px 700px at 12% 8%, rgba(212,175,55,.10), transparent 55%),
+    radial-gradient(1200px 900px at 50% 120%, rgba(108,184,230,.06), transparent 60%),
+    linear-gradient(180deg,#0c0a08 0%, #100c08 40%, #0a0806 100%);
+}
+.vignette{position:fixed;inset:0;z-index:0;pointer-events:none;
+  box-shadow:inset 0 0 320px 60px rgba(0,0,0,.7);}
+.wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- top bar ---------- */
+header.bar{
+  position:sticky;top:0;z-index:30;
+  display:flex;align-items:center;gap:18px;
+  padding:14px 22px;margin:0 -22px 8px;
+  backdrop-filter:blur(14px);
+  background:linear-gradient(180deg,rgba(12,10,8,.92),rgba(12,10,8,.55));
+  border-bottom:1px solid var(--stroke);
+}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none}
+.brand .sigil{
+  width:38px;height:38px;display:grid;place-items:center;border-radius:10px;
+  background:radial-gradient(circle at 30% 25%, #2a2012, #120d07);
+  border:1px solid var(--stroke-strong);
+  box-shadow:0 0 22px rgba(212,175,55,.25), inset 0 0 12px rgba(0,0,0,.6);
+  font-size:20px;
+}
+.brand h1{
+  font-family:'Cinzel Decorative',serif;font-weight:900;
+  font-size:19px;letter-spacing:.5px;margin:0;line-height:1;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.brand small{display:block;font-family:'Inter';font-weight:600;font-size:9.5px;
+  letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase;margin-top:3px}
+nav.tabs{display:flex;gap:6px;margin-left:8px}
+nav.tabs button{
+  font-family:'Cinzel',serif;font-weight:700;font-size:13px;letter-spacing:.6px;
+  color:var(--ink-dim);background:transparent;border:1px solid transparent;
+  padding:9px 16px;border-radius:11px;cursor:pointer;transition:.18s;
+}
+nav.tabs button:hover{color:var(--ink);background:rgba(212,175,55,.06)}
+nav.tabs button.active{
+  color:#1a1408;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));
+  box-shadow:0 6px 18px -6px rgba(212,175,55,.6);
+}
+.spacer{flex:1}
+.toolbtn{
+  display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none;
+  font-size:12px;font-weight:600;color:var(--ink-dim);
+  background:var(--panel);border:1px solid var(--stroke);
+  padding:8px 12px;border-radius:11px;transition:.18s;
+}
+.toolbtn:hover{border-color:var(--stroke-strong);color:var(--ink)}
+.toolbtn.on{color:var(--gold-bright);border-color:var(--stroke-strong);
+  box-shadow:inset 0 0 14px rgba(212,175,55,.12)}
+.toolbtn .dot{width:7px;height:7px;border-radius:50%;background:var(--ink-faint)}
+.toolbtn.on .dot{background:var(--green);box-shadow:0 0 8px var(--green)}
+.rankchip{display:flex;align-items:center;gap:9px;padding:6px 13px 6px 9px;border-radius:999px;
+  background:linear-gradient(180deg,rgba(40,30,16,.9),rgba(20,15,8,.9));
+  border:1px solid var(--stroke-strong);box-shadow:var(--shadow)}
+.rankchip .ico{font-size:17px;filter:drop-shadow(0 0 6px rgba(212,175,55,.5))}
+.rankchip .lbl{font-family:'Cinzel',serif;font-weight:700;font-size:12.5px;color:var(--gold-bright);line-height:1}
+.rankchip .sub{font-size:9px;color:var(--ink-faint);letter-spacing:1px;text-transform:uppercase}
+
+/* ---------- views ---------- */
+.view{display:none;animation:fade .4s ease}
+.view.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding:46px 10px 26px}
+.hero .eyebrow{font-family:'Cinzel',serif;letter-spacing:5px;font-size:11px;color:var(--gold-deep);
+  text-transform:uppercase;margin-bottom:14px}
+.hero h2{
+  font-family:'Cinzel Decorative',serif;font-weight:900;
+  font-size:clamp(34px,6.4vw,66px);line-height:1.02;margin:0 0 16px;
+  background:linear-gradient(175deg,#fff3d6 5%,var(--gold) 45%,var(--gold-deep) 78%, #8a6a26 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 4px 40px rgba(212,175,55,.18);
+}
+.hero p{max-width:560px;margin:0 auto 26px;color:var(--ink-dim);font-size:16px;line-height:1.6}
+.hero .cta{display:inline-flex;gap:13px;flex-wrap:wrap;justify-content:center}
+.btn{
+  font-family:'Cinzel',serif;font-weight:700;letter-spacing:.6px;font-size:14px;cursor:pointer;
+  padding:14px 28px;border-radius:13px;border:1px solid transparent;transition:.18s;display:inline-flex;gap:9px;align-items:center;
+}
+.btn.primary{color:#1a1408;background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));
+  box-shadow:0 14px 34px -12px rgba(212,175,55,.7)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgba(212,175,55,.85)}
+.btn.ghost{color:var(--ink);background:var(--panel);border-color:var(--stroke)}
+.btn.ghost:hover{border-color:var(--stroke-strong);color:var(--gold-bright)}
+
+/* ---------- panels ---------- */
+.panel{background:var(--panel);border:1px solid var(--stroke);border-radius:var(--radius);
+  box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.panel.framed{position:relative;overflow:hidden}
+.panel.framed::before{content:"";position:absolute;inset:0;border-radius:var(--radius);
+  padding:1px;background:linear-gradient(135deg,var(--stroke-strong),transparent 40%,transparent 60%,var(--stroke-strong));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+
+/* ---------- TRAIN ---------- */
+.train-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:6px}
+.statstrip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.stat{padding:14px 12px;text-align:center;border-radius:14px;background:rgba(20,15,9,.6);border:1px solid var(--stroke)}
+.stat .num{font-family:'Cinzel',serif;font-weight:900;font-size:26px;line-height:1;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);margin-top:7px}
+.stat.flame .num{background:linear-gradient(180deg,#ffd27a,#ff7a3c);-webkit-background-clip:text;background-clip:text}
+.stat.flame.lit{box-shadow:0 0 0 1px var(--stroke-strong),0 0 26px -2px rgba(255,120,40,.5);
+  border-color:rgba(255,140,60,.5)}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-top:4px}
+.sel{position:relative}
+.sel select{
+  appearance:none;font-family:'Inter';font-weight:600;font-size:13px;color:var(--ink);
+  background:var(--panel-solid);border:1px solid var(--stroke);border-radius:11px;
+  padding:10px 34px 10px 14px;cursor:pointer}
+.sel::after{content:"▾";position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--gold);pointer-events:none;font-size:12px}
+.seg{display:flex;background:var(--panel-solid);border:1px solid var(--stroke);border-radius:11px;padding:3px;gap:3px}
+.seg button{font-family:'Inter';font-weight:600;font-size:12.5px;color:var(--ink-dim);background:transparent;border:0;
+  padding:8px 14px;border-radius:8px;cursor:pointer;transition:.15s}
+.seg button.active{color:#1a1408;background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep))}
+
+.arena{position:relative;min-height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:38px 26px;text-align:center;overflow:hidden}
+.arena .chip{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--gold);background:rgba(212,175,55,.1);border:1px solid var(--stroke);
+  padding:6px 13px;border-radius:999px;margin-bottom:20px}
+.arena .ctx{font-size:12.5px;color:var(--ink-faint);letter-spacing:.5px;margin-bottom:6px;min-height:16px}
+.arena .prompt{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(26px,4.4vw,42px);line-height:1.12;
+  margin:0 0 14px;color:var(--ink);max-width:680px}
+.arena .desc{color:var(--ink-dim);font-size:14px;max-width:520px;line-height:1.55;min-height:22px}
+.arena .feedback{margin-top:24px;min-height:74px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.fb-line{font-family:'Cinzel',serif;font-weight:700;font-size:18px;letter-spacing:.5px;opacity:0;transition:.2s}
+.fb-line.show{opacity:1}
+.fb-line.good{color:var(--green-soft)}
+.fb-line.bad{color:var(--crimson-soft)}
+.reveal-keys{display:flex;gap:8px;align-items:center;opacity:0;transition:.2s}
+.reveal-keys.show{opacity:1}
+.arena.shake{animation:shake .42s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}
+30%,50%,70%{transform:translateX(-9px)}40%,60%{transform:translateX(9px)}}
+.flash-good{position:absolute;inset:0;background:radial-gradient(circle,rgba(95,199,122,.22),transparent 70%);opacity:0;pointer-events:none}
+.flash-good.go{animation:flashg .5s ease}
+@keyframes flashg{0%{opacity:1}100%{opacity:0}}
+.idle-cta{display:flex;flex-direction:column;gap:18px;align-items:center}
+.idle-cta .big{font-family:'Cinzel',serif;font-size:22px;color:var(--ink-dim)}
+
+/* keycap */
+.keycap{font-family:'Inter';font-weight:700;font-size:15px;color:var(--ink);
+  min-width:38px;height:42px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:9px;background:linear-gradient(180deg,#2c2418,#191309);
+  border:1px solid var(--stroke-strong);
+  box-shadow:0 4px 0 #0c0905, 0 6px 10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,223,145,.15);
+  text-shadow:0 1px 0 #000}
+.keycap.mod{font-size:12px;color:var(--gold-bright);min-width:auto}
+.keycap.big{font-size:20px;height:52px;min-width:50px}
+.kplus{color:var(--ink-faint);font-weight:700;font-size:15px}
+
+/* keyboard visualizer */
+.kbd{margin-top:6px;padding:16px;display:flex;flex-direction:column;gap:7px;align-items:center}
+.kbd .row{display:flex;gap:6px;justify-content:center;flex-wrap:nowrap}
+.key{
+  width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:var(--ink-dim);cursor:pointer;user-select:none;
+  background:linear-gradient(180deg,#221b11,#140f08);border:1px solid var(--stroke);
+  box-shadow:0 2px 0 #0a0704;transition:transform .06s, box-shadow .1s, background .12s, color .12s;
+  position:relative;
+}
+.key.wide{width:62px;font-size:11px}
+.key.xwide{width:120px;font-size:11px}
+.key:hover{color:var(--ink);border-color:var(--stroke-strong)}
+.key:active,.key.press{transform:translateY(2px);box-shadow:0 0 0 #0a0704}
+.key.hint{color:#1a1408;background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));
+  border-color:var(--gold-bright);box-shadow:0 0 18px rgba(212,175,55,.55),0 2px 0 #6b4f17;animation:pulseK 1.3s ease-in-out infinite}
+.key.modon{color:var(--gold-bright);border-color:var(--stroke-strong);box-shadow:inset 0 0 12px rgba(212,175,55,.25),0 2px 0 #0a0704}
+.key.good{color:#0c1a0e;background:linear-gradient(180deg,var(--green-soft),var(--green));border-color:var(--green-soft)}
+.key.bad{color:#fff;background:linear-gradient(180deg,var(--crimson-soft),var(--crimson));border-color:var(--crimson-soft)}
+@keyframes pulseK{0%,100%{box-shadow:0 0 14px rgba(212,175,55,.45),0 2px 0 #6b4f17}50%{box-shadow:0 0 26px rgba(212,175,55,.8),0 2px 0 #6b4f17}}
+.kbd-hint{font-size:11.5px;color:var(--ink-faint);text-align:center;margin-top:4px}
+
+/* ---------- CODEX ---------- */
+.codex-head{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin:8px 0 18px}
+.search{position:relative;flex:1;min-width:240px}
+.search input{width:100%;font-family:'Inter';font-size:14px;color:var(--ink);
+  background:var(--panel-solid);border:1px solid var(--stroke);border-radius:13px;padding:13px 16px 13px 42px}
+.search input::placeholder{color:var(--ink-faint)}
+.search input:focus{outline:none;border-color:var(--stroke-strong);box-shadow:0 0 0 3px rgba(212,175,55,.1)}
+.search .ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:15px}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.fchip{font-size:12px;font-weight:600;color:var(--ink-dim);background:var(--panel);border:1px solid var(--stroke);
+  padding:8px 14px;border-radius:999px;cursor:pointer;transition:.15s}
+.fchip:hover{color:var(--ink);border-color:var(--stroke-strong)}
+.fchip.active{color:#1a1408;background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));border-color:var(--gold-bright)}
+.catblock{margin-bottom:26px}
+.catblock h3{font-family:'Cinzel',serif;font-weight:700;font-size:15px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);margin:0 0 13px;display:flex;align-items:center;gap:11px}
+.catblock h3 .ln{flex:1;height:1px;background:linear-gradient(90deg,var(--stroke-strong),transparent)}
+.catblock h3 .cnt{font-family:'Inter';font-size:11px;color:var(--ink-faint);font-weight:600;letter-spacing:1px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.card{display:flex;gap:14px;align-items:flex-start;padding:15px 16px;border-radius:14px;
+  background:rgba(20,15,9,.55);border:1px solid var(--stroke);transition:.16s}
+.card:hover{border-color:var(--stroke-strong);transform:translateY(-2px);background:rgba(28,21,12,.7)}
+.card .keys{display:flex;gap:5px;align-items:center;flex-shrink:0;padding-top:2px}
+.card .body .t{font-weight:700;font-size:14.5px;color:var(--ink);margin-bottom:4px;line-height:1.25}
+.card .body .d{font-size:12.5px;color:var(--ink-dim);line-height:1.5}
+.mret{font-size:11px;color:var(--ink-faint);font-style:italic;margin-top:6px}
+.nores{text-align:center;color:var(--ink-faint);padding:40px;font-size:15px}
+
+/* ---------- STATS ---------- */
+.rankhero{display:flex;flex-wrap:wrap;gap:26px;align-items:center;padding:30px 28px;margin-bottom:18px}
+.rankhero .medal{width:118px;height:118px;flex-shrink:0;display:grid;place-items:center;border-radius:50%;
+  background:radial-gradient(circle at 35% 28%,#3a2c15,#0e0a05);border:2px solid var(--stroke-strong);
+  box-shadow:0 0 44px -6px rgba(212,175,55,.5),inset 0 0 28px rgba(0,0,0,.7);font-size:52px;position:relative}
+.rankhero .info{flex:1;min-width:240px}
+.rankhero .info .rk{font-family:'Cinzel Decorative',serif;font-weight:900;font-size:30px;line-height:1;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rankhero .info .next{font-size:12.5px;color:var(--ink-dim);margin:9px 0 12px}
+.xpbar{height:13px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid var(--stroke);overflow:hidden}
+.xpbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright));
+  box-shadow:0 0 16px rgba(212,175,55,.6);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.xpnums{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-faint);margin-top:7px;letter-spacing:.5px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.tile{padding:20px 16px;text-align:center;border-radius:15px;background:rgba(20,15,9,.55);border:1px solid var(--stroke)}
+.tile .v{font-family:'Cinzel',serif;font-weight:900;font-size:30px;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tile .k{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
+.mastery{padding:22px 24px}
+.mastery h3{font-family:'Cinzel',serif;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:14px;color:var(--gold);margin:0 0 18px}
+.mrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.mrow .name{width:130px;font-size:13px;font-weight:600;color:var(--ink-dim);flex-shrink:0}
+.mrow .bar{flex:1;height:11px;border-radius:999px;background:rgba(0,0,0,.4);border:1px solid var(--stroke);overflow:hidden}
+.mrow .bar i{display:block;height:100%;border-radius:999px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.mrow .pct{width:42px;text-align:right;font-size:12.5px;font-weight:700;color:var(--ink)}
+.dim{color:var(--ink-faint);font-size:12.5px;font-style:italic}
+.reset{margin-top:8px}
+.reset button{font-family:'Inter';font-weight:600;font-size:12.5px;color:var(--crimson-soft);
+  background:transparent;border:1px solid rgba(192,57,43,.4);padding:9px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.reset button:hover{background:rgba(192,57,43,.12);border-color:var(--crimson)}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(120px);z-index:60;
+  display:flex;align-items:center;gap:13px;padding:14px 22px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(40,30,16,.97),rgba(22,16,9,.97));border:1px solid var(--stroke-strong);
+  box-shadow:0 20px 50px -12px rgba(0,0,0,.8);transition:transform .5s cubic-bezier(.2,1,.3,1);max-width:90vw}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .ico{font-size:26px}
+.toast .tt{font-family:'Cinzel',serif;font-weight:700;font-size:15px;color:var(--gold-bright)}
+.toast .ts{font-size:12px;color:var(--ink-dim);margin-top:2px}
+
+footer{position:relative;z-index:2;text-align:center;padding:30px 22px 50px;color:var(--ink-faint);font-size:12px;line-height:1.7}
+footer a{color:var(--gold-deep);text-decoration:none}
+footer a:hover{color:var(--gold-bright)}
+.disclaimer{max-width:640px;margin:14px auto 0;font-size:11px;color:#5e5644;line-height:1.6}
+
+.shard{position:fixed;width:9px;height:9px;z-index:55;pointer-events:none;border-radius:2px}
+
+@media(max-width:720px){
+  nav.tabs button{padding:8px 11px;font-size:12px}
+  .brand small{display:none}
+  .statstrip{grid-template-columns:repeat(3,1fr)}
+  .stat:nth-child(4),.stat:nth-child(5){grid-column:span 1}
+  .key{width:30px;height:34px;font-size:11px}
+  .key.wide{width:44px}.key.xwide{width:78px}
+  .rankchip .sub{display:none}
+  .toolbtn span.lbl{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.05ms!important}}
+</style>
+</head>
+<body>
+<canvas id="ember"></canvas>
+<div class="bg-glow"></div>
+<div class="vignette"></div>
+
+<header class="bar">
+  <div class="brand" onclick="go('train')">
+    <div class="sigil">⚔️</div>
+    <div><h1>Hotkey Forge</h1><small>Age of Empires II · DE</small></div>
+  </div>
+  <nav class="tabs">
+    <button data-tab="train" class="active" onclick="go('train')">Train</button>
+    <button data-tab="codex" onclick="go('codex')">Codex</button>
+    <button data-tab="stats" onclick="go('stats')">Stats</button>
+  </nav>
+  <div class="spacer"></div>
+  <div class="toolbtn on" id="soundBtn" onclick="toggleSound()" title="Toggle sound"><span class="dot"></span><span class="lbl">Sound</span></div>
+  <div class="rankchip" id="rankChip" title="Your mastery rank">
+    <span class="ico">🛡️</span>
+    <div><div class="lbl" id="rankLbl">Dark Age</div><div class="sub">Rank</div></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ===================== TRAIN ===================== -->
+<section class="view show" id="view-train">
+  <div class="hero" id="hero">
+    <div class="eyebrow">Sharpen your APM</div>
+    <h2>Forge Your Macro.<br/>Master Every Key.</h2>
+    <p>A relentless training ground for Age of Empires II hotkeys. Drill the bindings that win games — idle villagers, town centers, stances, control groups — until they live in your fingers.</p>
+    <div class="cta">
+      <button class="btn primary" onclick="startDrill()">⚔️ Begin Drill</button>
+      <button class="btn ghost" onclick="go('codex')">📜 Browse the Codex</button>
+    </div>
+  </div>
+
+  <div class="train-grid">
+    <div class="statstrip">
+      <div class="stat"><div class="num" id="sScore">0</div><div class="lbl">Score</div></div>
+      <div class="stat flame" id="streakStat"><div class="num" id="sStreak">0</div><div class="lbl">🔥 Streak</div></div>
+      <div class="stat"><div class="num" id="sAcc">—</div><div class="lbl">Accuracy</div></div>
+      <div class="stat"><div class="num" id="sReact">—</div><div class="lbl">Avg ms</div></div>
+      <div class="stat"><div class="num" id="sBest">0</div><div class="lbl">Best Streak</div></div>
+    </div>
+
+    <div class="controls">
+      <div class="sel"><select id="catSel" onchange="changeCat()"></select></div>
+      <div class="seg" id="modeSeg">
+        <button class="active" data-mode="hint" onclick="setMode('hint')">💡 Hint</button>
+        <button data-mode="blind" onclick="setMode('blind')">🗡️ Blind</button>
+      </div>
+      <button class="btn ghost" id="skipBtn" onclick="skip()" style="padding:10px 18px;display:none">Skip ⏭</button>
+    </div>
+
+    <div class="panel framed arena" id="arena">
+      <div class="flash-good" id="flashGood"></div>
+      <div class="idle-cta" id="idleCta">
+        <div class="big">Press <span class="keycap big">⚔</span> Begin Drill to start forging</div>
+        <button class="btn primary" onclick="startDrill()">Begin Drill</button>
+      </div>
+      <div id="liveCard" style="display:none;width:100%">
+        <div class="chip" id="qChip">Navigation</div>
+        <div class="ctx" id="qCtx"></div>
+        <div class="prompt" id="qPrompt">—</div>
+        <div class="desc" id="qDesc"></div>
+        <div class="feedback">
+          <div class="fb-line" id="fbLine"></div>
+          <div class="reveal-keys" id="revealKeys"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel framed kbd" id="kbd"></div>
+    <div class="kbd-hint" id="kbdHint">On touch devices, tap the keys above. Toggle <b>Ctrl</b>/<b>Shift</b> first for combos.</div>
+  </div>
+</section>
+
+<!-- ===================== CODEX ===================== -->
+<section class="view" id="view-codex">
+  <div class="hero" style="padding:34px 10px 6px">
+    <div class="eyebrow">The Codex</div>
+    <h2 style="font-size:clamp(28px,5vw,46px)">Every Binding, One Scroll</h2>
+  </div>
+  <div class="codex-head">
+    <div class="search">
+      <span class="ic">🔎</span>
+      <input id="searchBox" placeholder="Search actions or keys…  e.g. idle, town center, attack" oninput="renderCodex()" />
+    </div>
+  </div>
+  <div class="filters" id="codexFilters"></div>
+  <div id="codexList" style="margin-top:20px"></div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="view" id="view-stats">
+  <div class="hero" style="padding:34px 10px 6px">
+    <div class="eyebrow">War Record</div>
+    <h2 style="font-size:clamp(28px,5vw,46px)">Your Mastery</h2>
+  </div>
+
+  <div class="panel framed rankhero">
+    <div class="medal" id="medal">🛡️</div>
+    <div class="info">
+      <div class="rk" id="statRank">Dark Age</div>
+      <div class="next" id="statNext">Begin a drill to start your ascent.</div>
+      <div class="xpbar"><i id="xpFill" style="width:0%"></i></div>
+      <div class="xpnums"><span id="xpNow">0 XP</span><span id="xpNext">25 XP → Feudal Age</span></div>
+    </div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><div class="v" id="tDrills">0</div><div class="k">Total Drills</div></div>
+    <div class="tile"><div class="v" id="tAcc">—</div><div class="k">Accuracy</div></div>
+    <div class="tile"><div class="v" id="tBest">0</div><div class="k">Best Streak</div></div>
+    <div class="tile"><div class="v" id="tReact">—</div><div class="k">Avg Reaction</div></div>
+    <div class="tile"><div class="v" id="tMastered">0</div><div class="k">Keys Mastered</div></div>
+  </div>
+
+  <div class="panel framed mastery">
+    <h3>Mastery by Discipline</h3>
+    <div id="masteryRows"></div>
+    <div class="reset"><button onclick="resetAll()">⟳ Reset all progress</button></div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div>⚔️ <b style="color:var(--gold-deep)">Hotkey Forge</b> — a training tool for Age of Empires II: Definitive Edition.</div>
+  <div class="disclaimer">
+    Bindings reflect AoE II:DE <b>default &amp; competitive-standard</b> hotkeys (Grid layout). Your in-game config is fully customisable — set yours under <i>Options → Hotkeys</i>. Not affiliated with or endorsed by Microsoft, Xbox Game Studios, or Forgotten Empires.
+  </div>
+</footer>
+
+<div class="toast" id="toast"><div class="ico" id="toastIco">🎖️</div><div><div class="tt" id="toastTt"></div><div class="ts" id="toastTs"></div></div></div>
+
+<script>
+/* ============================================================
+   DATA — AoE II: DE default / competitive-standard hotkeys
+   ============================================================ */
+const HOTKEYS = [
+  // NAVIGATION & MACRO
+  {a:"Select / cycle Town Centers", k:["H"], cat:"Navigation", ctx:"Anywhere", d:"Jumps to a Town Center; press again to cycle through the rest.", drill:true},
+  {a:"Go to next idle Villager", k:["."], cat:"Navigation", ctx:"Anywhere", d:"Finds a Villager doing nothing. Keep this number at zero.", drill:true},
+  {a:"Go to next idle Military unit", k:[","], cat:"Navigation", ctx:"Anywhere", d:"Cycles to soldiers standing around with no orders.", drill:true},
+  {a:"Go to last notification / event", k:["Home"], cat:"Navigation", ctx:"Anywhere", d:"Snaps the camera to your latest alert — 'under attack', a finished tech, and more.", drill:true},
+  {a:"Center view on selection", k:["Space"], cat:"Navigation", ctx:"Selection active", d:"Re-centres the camera on whatever you currently have selected.", drill:true},
+  {a:"Delete selected unit / building", k:["Delete"], cat:"Navigation", ctx:"Selection active", d:"Removes the selected object. Useful for deleting walls and trash units.", drill:true},
+
+  // TOWN CENTER
+  {a:"Train a Villager", k:["Q"], cat:"Town Center", ctx:"Town Center selected", d:"Top-left of the TC card. The single most important button in the game.", drill:true},
+  {a:"Research Loom", k:["A"], cat:"Town Center", ctx:"Town Center selected", d:"+HP and armour for every Villager. A common scout-rush answer.", drill:true},
+  {a:"Research Wheelbarrow / Hand Cart", k:["S"], cat:"Town Center", ctx:"Town Center selected", d:"Boosts Villager carry capacity and walk speed.", drill:true},
+  {a:"Research Town Watch / Town Guard", k:["D"], cat:"Town Center", ctx:"Town Center selected", d:"Building line-of-sight, then building HP.", drill:true},
+  {a:"Advance to the next Age", k:["Z"], cat:"Town Center", ctx:"Town Center selected", d:"Feudal → Castle → Imperial. Time it well.", drill:true},
+
+  // ECONOMY (villager actions)
+  {a:"Open Economic Buildings menu", k:["Q"], cat:"Economy", ctx:"Villager selected", d:"Houses, drop-off camps, farms, mill, market, dock…", drill:true},
+  {a:"Open Military Buildings menu", k:["W"], cat:"Economy", ctx:"Villager selected", d:"Barracks, archery range, stable, blacksmith, walls…", drill:true},
+  {a:"Repair", k:["E"], cat:"Economy", ctx:"Villager selected", d:"Send a Villager to repair a building, ship, or siege weapon.", drill:true},
+
+  // MILITARY (selected units)
+  {a:"Patrol", k:["Q"], cat:"Military", ctx:"Units selected", d:"Move to a point and attack anything met along the way. Great for keeping formation.", drill:true},
+  {a:"Guard", k:["W"], cat:"Military", ctx:"Units selected", d:"Protect a chosen unit or building.", drill:true},
+  {a:"Follow", k:["E"], cat:"Military", ctx:"Units selected", d:"Follow the targeted unit around the map.", drill:true},
+  {a:"Attack-Move", k:["R"], cat:"Military", ctx:"Units selected", d:"Advance and engage everything in range. The team-fight button.", drill:true},
+  {a:"Aggressive Stance", k:["A"], cat:"Military", ctx:"Units selected", d:"Chase and attack enemies freely.", drill:true},
+  {a:"Defensive Stance", k:["S"], cat:"Military", ctx:"Units selected", d:"Attack nearby enemies, then return to position.", drill:true},
+  {a:"Stand Ground", k:["D"], cat:"Military", ctx:"Units selected", d:"Hold position — do not chase. Essential for mangonel lines.", drill:true},
+  {a:"No-Attack Stance", k:["F"], cat:"Military", ctx:"Units selected", d:"Never auto-attack. Pure manual micro control.", drill:true},
+
+  // SELECTION
+  {a:"Select all Town Centers", k:["Ctrl","Shift","H"], cat:"Selection", ctx:"Anywhere", d:"Grab every TC at once and queue Villagers across your whole economy.", drill:true},
+  {a:"Select Barracks", k:["Ctrl","B"], cat:"Selection", ctx:"Anywhere", d:"Jump to and select a Barracks.", drill:true},
+  {a:"Select Archery Range", k:["Ctrl","A"], cat:"Selection", ctx:"Anywhere", d:"Jump to and select an Archery Range.", drill:true},
+  {a:"Select Stable", k:["Ctrl","L"], cat:"Selection", ctx:"Anywhere", d:"Jump to and select a Stable.", drill:true},
+  {a:"Assign Control Group 1", k:["Ctrl","1"], cat:"Selection", ctx:"Selection active", d:"Bind the current selection to group 1. Works for 1–0.", drill:true},
+  {a:"Recall Control Group 1", k:["1"], cat:"Selection", ctx:"Anywhere", d:"Re-select group 1. Double-tap to centre the camera on it.", drill:true},
+  {a:"Add to selection", k:["Shift","Click"], cat:"Selection", ctx:"Mouse", d:"Shift-click units or buildings to add them to your current selection.", drill:false},
+
+  // CAMERA & UI
+  {a:"Zoom in", k:["Ctrl","="], cat:"Camera & UI", ctx:"Anywhere", d:"Tighten the camera toward the action.", drill:false},
+  {a:"Zoom out", k:["Ctrl","-"], cat:"Camera & UI", ctx:"Anywhere", d:"Pull the camera back for a wider view.", drill:false},
+  {a:"Reset zoom", k:["Ctrl","Backspace"], cat:"Camera & UI", ctx:"Anywhere", d:"Return to the default zoom level.", drill:false},
+  {a:"Pause (single-player)", k:["F3"], cat:"Camera & UI", ctx:"Anywhere", d:"Freeze the game in single-player.", drill:false},
+  {a:"Toggle clock / score panel", k:["F11"], cat:"Camera & UI", ctx:"Anywhere", d:"Show match time and the score overlay.", drill:false},
+  {a:"Scroll the camera", k:["Arrows"], cat:"Camera & UI", ctx:"Anywhere", d:"Pan around the map with the arrow keys.", drill:false},
+];
+
+const CATS = ["Navigation","Town Center","Economy","Military","Selection","Camera & UI"];
+const CAT_ICON = {"Navigation":"🧭","Town Center":"🏛️","Economy":"⛏️","Military":"⚔️","Selection":"🎯","Camera & UI":"🎥"};
+const RANKS = [
+  {n:"Dark Age", xp:0, ico:"🛖"},
+  {n:"Feudal Age", xp:25, ico:"🛡️"},
+  {n:"Castle Age", xp:120, ico:"🏰"},
+  {n:"Imperial Age", xp:340, ico:"👑"},
+  {n:"Conqueror", xp:750, ico:"⚔️"},
+];
+
+/* ============================================================
+   STATE / PERSISTENCE
+   ============================================================ */
+const LS_KEY = "hotkeyForge.v1";
+const defaultState = () => ({
+  xp:0, bestStreak:0, totalAttempts:0, totalCorrect:0, totalReactMs:0, reactCount:0,
+  perCat:Object.fromEntries(CATS.map(c=>[c,{att:0,cor:0}])),
+  mastered:{}, sound:true,
+});
+let S = load();
+function load(){
+  try{const r=JSON.parse(localStorage.getItem(LS_KEY)); if(r&&r.perCat){ // merge new cats
+    const base=defaultState(); return {...base,...r, perCat:{...base.perCat,...r.perCat}, mastered:r.mastered||{}};}}catch(e){}
+  return defaultState();
+}
+function save(){ try{localStorage.setItem(LS_KEY, JSON.stringify(S));}catch(e){} }
+
+/* session (not persisted) */
+let sess = {score:0, streak:0, att:0, cor:0, reactMs:0, reactN:0};
+let mode = "hint";
+let drillCat = "All";
+let active = null;       // current question hotkey
+let startT = 0;
+let answering = false;   // true when a question is live awaiting input
+let locked = false;      // brief lock during feedback
+let modToggle = {Ctrl:false, Shift:false, Alt:false}; // for touch combos
+let running = false;
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $ = id => document.getElementById(id);
+function keyDisplay(k){
+  const map={" ":"Space","Space":"Space",".":".",",":",","Home":"Home","Delete":"Del","Backspace":"⌫","=":"+","-":"–","Arrows":"◄►","Click":"Click"};
+  return map[k]||k;
+}
+function isMod(k){return k==="Ctrl"||k==="Shift"||k==="Alt";}
+function keycapHTML(keys,big){
+  const cls = big?" big":"";
+  return keys.map((k,i)=>{
+    const sep = i>0?'<span class="kplus">+</span>':'';
+    const mc = isMod(k)?' mod':'';
+    return sep+`<span class="keycap${mc}${cls}">${keyDisplay(k)}</span>`;
+  }).join('');
+}
+function mainKeyOf(h){ return h.k.filter(k=>!isMod(k)).slice(-1)[0]; }
+
+/* ============================================================
+   AUDIO (Web Audio — no asset files)
+   ============================================================ */
+let actx=null;
+function audio(){ if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} return actx; }
+function tone(freq,dur,type="sine",vol=.18,when=0){
+  if(!S.sound) return; const a=audio(); if(!a) return;
+  const t=a.currentTime+when;
+  const o=a.createOscillator(), g=a.createGain();
+  o.type=type; o.frequency.setValueAtTime(freq,t);
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+.012);
+  g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+dur+.02);
+}
+function sfxGood(){ tone(660,.12,"triangle",.16); tone(990,.16,"triangle",.14,.06); }
+function sfxBad(){ tone(150,.22,"square",.12); }
+function sfxStreak(n){ [523,659,784,1046].slice(0,Math.min(4,1+Math.floor(n/5))).forEach((f,i)=>tone(f,.18,"triangle",.13,i*.05)); }
+function sfxRank(){ [392,523,659,784,1046].forEach((f,i)=>tone(f,.5,"sine",.15,i*.08)); tone(1318,.7,"triangle",.12,.42); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+function go(tab){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('show'));
+  $('view-'+tab).classList.add('show');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(tab==='stats') renderStats();
+  if(tab==='codex') renderCodex();
+}
+
+/* ============================================================
+   TRAIN
+   ============================================================ */
+function buildCatSelect(){
+  const sel=$('catSel');
+  sel.innerHTML = `<option value="All">⚔️ All Disciplines</option>` +
+    CATS.map(c=>`<option value="${c}">${CAT_ICON[c]} ${c}</option>`).join('');
+}
+function changeCat(){ drillCat=$('catSel').value; if(running) nextQuestion(); }
+function setMode(m){ mode=m; document.querySelectorAll('#modeSeg button').forEach(b=>b.classList.toggle('active',b.dataset.mode===m)); renderKbd(); }
+
+function drillPool(){
+  return HOTKEYS.filter(h=>h.drill && (drillCat==="All"||h.cat===drillCat));
+}
+function startDrill(){
+  running=true; sess={score:0,streak:0,att:0,cor:0,reactMs:0,reactN:0};
+  $('hero').style.display='none';
+  $('idleCta').style.display='none';
+  $('liveCard').style.display='block';
+  $('skipBtn').style.display='inline-flex';
+  go('train');
+  audio();
+  updateSessStats();
+  nextQuestion();
+}
+function nextQuestion(){
+  const pool=drillPool();
+  if(!pool.length){return;}
+  let pick; let tries=0;
+  do{ pick=pool[Math.floor(Math.random()*pool.length)]; tries++; }
+  while(pool.length>1 && pick===active && tries<8);
+  active=pick;
+  answering=true; locked=false;
+  modToggle={Ctrl:false,Shift:false,Alt:false};
+  $('qChip').innerHTML = CAT_ICON[pick.cat]+' '+pick.cat;
+  $('qCtx').textContent = pick.ctx==="Anywhere"? "" : "▸ "+pick.ctx;
+  $('qPrompt').textContent = pick.a;
+  $('qDesc').textContent = pick.d;
+  $('fbLine').className='fb-line';
+  $('fbLine').textContent='';
+  $('revealKeys').className='reveal-keys';
+  $('revealKeys').innerHTML='';
+  startT=performance.now();
+  renderKbd();
+}
+function skip(){
+  if(!running||!answering) return;
+  // count as a miss for accuracy honesty
+  registerResult(false, 0, true);
+  flashReveal("Skipped","bad");
+  setTimeout(()=>{ if(running) nextQuestion(); }, 900);
+}
+
+function handleAnswer(tok){
+  if(!running||!answering||locked) return;
+  const expect=parseExpected(active.k);
+  const ok = tok.Ctrl===expect.Ctrl && tok.Shift===expect.Shift && tok.Alt===expect.Alt && tok.main===expect.main;
+  const rt = Math.round(performance.now()-startT);
+  answering=false; locked=true;
+  if(ok){
+    registerResult(true, rt, false);
+    correctFX(rt);
+    setTimeout(()=>{ if(running) nextQuestion(); }, 620);
+  } else {
+    registerResult(false, rt, false);
+    wrongFX(tok);
+    setTimeout(()=>{ if(running) nextQuestion(); }, 1250);
+  }
+}
+function parseExpected(keys){
+  const e={Ctrl:false,Shift:false,Alt:false,main:null};
+  keys.forEach(k=>{ if(k==="Ctrl")e.Ctrl=true; else if(k==="Shift")e.Shift=true; else if(k==="Alt")e.Alt=true; else e.main=k;});
+  return e;
+}
+function registerResult(correct, rt, isSkip){
+  sess.att++; S.totalAttempts++;
+  S.perCat[active.cat].att++;
+  if(correct){
+    sess.cor++; sess.streak++; S.totalCorrect++; S.perCat[active.cat].cor++;
+    if(rt){ sess.reactMs+=rt; sess.reactN++; S.totalReactMs+=rt; S.reactCount++; }
+    const gain = Math.max(2, Math.round((2200-Math.min(rt,2200))/120))+2;
+    sess.score += gain*(1+Math.min(sess.streak,12)*0.06);
+    const beforeRank = currentRank().n;
+    S.xp += gain;
+    S.mastered[mainKeyOf(active)+'|'+active.cat] = true;
+    if(sess.streak>S.bestStreak) S.bestStreak=sess.streak;
+    if(sess.streak>0 && sess.streak%5===0){ sfxStreak(sess.streak); shardBurst(14); }
+    const afterRank=currentRank().n;
+    if(afterRank!==beforeRank){ onRankUp(afterRank); }
+  } else {
+    if(!isSkip && rt){ /* don't reward speed but count attempt */ }
+    sess.streak=0;
+  }
+  save();
+  updateSessStats();
+  updateRankChip();
+}
+function updateSessStats(){
+  $('sScore').textContent = Math.round(sess.score);
+  $('sStreak').textContent = sess.streak;
+  $('sAcc').textContent = sess.att? Math.round(sess.cor/sess.att*100)+'%' : '—';
+  $('sReact').textContent = sess.reactN? Math.round(sess.reactMs/sess.reactN) : '—';
+  $('sBest').textContent = S.bestStreak;
+  const ss=$('streakStat'); ss.classList.toggle('lit', sess.streak>=3);
+}
+function correctFX(rt){
+  const fast = rt<900;
+  flashReveal(fast? "⚡ Lightning! "+rt+"ms" : "✓ "+rt+"ms","good");
+  $('flashGood').classList.remove('go'); void $('flashGood').offsetWidth; $('flashGood').classList.add('go');
+  sfxGood();
+  highlightKbd('good');
+}
+function wrongFX(tok){
+  $('arena').classList.remove('shake'); void $('arena').offsetWidth; $('arena').classList.add('shake');
+  sfxBad();
+  const fb=$('fbLine'); fb.className='fb-line bad show'; fb.textContent='✗ The forge demands:';
+  const rk=$('revealKeys'); rk.className='reveal-keys show'; rk.innerHTML=keycapHTML(active.k,true);
+  highlightKbd('bad', tok);
+}
+function flashReveal(text,kind){
+  const fb=$('fbLine'); fb.className='fb-line '+(kind==='good'?'good':'bad')+' show'; fb.textContent=text;
+}
+
+/* ============================================================
+   KEYBOARD VISUALIZER
+   ============================================================ */
+const KB_ROWS = [
+  ["1","2","3","4","5","6","7","8","9","0","-","="],
+  ["Q","W","E","R","T","Y","U","I","O","P"],
+  ["A","S","D","F","G","H","J","K","L"],
+  ["Z","X","C","V","B","N","M",",","."],
+];
+function renderKbd(){
+  const wrap=$('kbd');
+  let html='';
+  KB_ROWS.forEach(row=>{
+    html+='<div class="row">'+row.map(k=>`<div class="key" data-k="${k}" onclick="touchKey('${k.replace(/'/g,"\\'")}')">${keyDisplay(k)}</div>`).join('')+'</div>';
+  });
+  // function row
+  html+='<div class="row">'+
+    `<div class="key wide" data-mod="Ctrl" onclick="touchMod('Ctrl')">Ctrl</div>`+
+    `<div class="key wide" data-mod="Shift" onclick="touchMod('Shift')">Shift</div>`+
+    `<div class="key xwide" data-k="Space" onclick="touchKey('Space')">Space</div>`+
+    `<div class="key wide" data-k="Home" onclick="touchKey('Home')">Home</div>`+
+    `<div class="key wide" data-k="Delete" onclick="touchKey('Delete')">Del</div>`+
+    '</div>';
+  wrap.innerHTML=html;
+  refreshKbdHint();
+}
+function refreshKbdHint(){
+  document.querySelectorAll('#kbd .key').forEach(el=>el.classList.remove('hint','modon','good','bad'));
+  // reflect mod toggles
+  Object.keys(modToggle).forEach(m=>{ if(modToggle[m]){ const el=document.querySelector(`#kbd .key[data-mod="${m}"]`); if(el)el.classList.add('modon'); }});
+  if(mode==='hint' && active && answering){
+    const exp=parseExpected(active.k);
+    if(exp.main){
+      const el=document.querySelector(`#kbd .key[data-k="${cssEsc(exp.main)}"]`);
+      if(el) el.classList.add('hint');
+    }
+    if(exp.Ctrl){const e=document.querySelector('#kbd .key[data-mod="Ctrl"]'); if(e)e.classList.add('hint');}
+    if(exp.Shift){const e=document.querySelector('#kbd .key[data-mod="Shift"]'); if(e)e.classList.add('hint');}
+  }
+}
+function cssEsc(k){ return k.replace(/"/g,'\\"'); }
+function highlightKbd(kind, tok){
+  if(kind==='good'){
+    const exp=parseExpected(active.k);
+    const el=document.querySelector(`#kbd .key[data-k="${cssEsc(exp.main)}"]`); if(el)el.classList.add('good');
+  } else {
+    const exp=parseExpected(active.k);
+    const el=document.querySelector(`#kbd .key[data-k="${cssEsc(exp.main)}"]`); if(el)el.classList.add('good');
+    if(tok&&tok.main){ const w=document.querySelector(`#kbd .key[data-k="${cssEsc(tok.main)}"]`); if(w&&w!==el)w.classList.add('bad'); }
+  }
+}
+/* touch / click input */
+function touchMod(m){ modToggle[m]=!modToggle[m]; refreshKbdHint(); }
+function touchKey(k){
+  pressVis(k);
+  if(!running){ return; }
+  handleAnswer({Ctrl:modToggle.Ctrl,Shift:modToggle.Shift,Alt:modToggle.Alt,main:k});
+  modToggle={Ctrl:false,Shift:false,Alt:false};
+  refreshKbdHint();
+}
+function pressVis(k){
+  const el=document.querySelector(`#kbd .key[data-k="${cssEsc(k)}"]`);
+  if(el){el.classList.add('press'); setTimeout(()=>el.classList.remove('press'),110);}
+}
+
+/* ============================================================
+   PHYSICAL KEYBOARD
+   ============================================================ */
+function codeToToken(e){
+  const t={Ctrl:e.ctrlKey||e.metaKey, Shift:e.shiftKey, Alt:e.altKey, main:null};
+  const c=e.code;
+  if(/^Key[A-Z]$/.test(c)) t.main=c.slice(3);
+  else if(/^Digit[0-9]$/.test(c)) t.main=c.slice(5);
+  else if(/^Numpad[0-9]$/.test(c)) t.main=c.slice(6);
+  else if(c==='Period') t.main='.';
+  else if(c==='Comma') t.main=',';
+  else if(c==='Space') t.main='Space';
+  else if(c==='Home') t.main='Home';
+  else if(c==='Delete') t.main='Delete';
+  else if(c==='Backspace') t.main='Backspace';
+  else if(c==='Minus') t.main='-';
+  else if(c==='Equal') t.main='=';
+  else if(c==='F3') t.main='F3';
+  else t.main = (e.key&&e.key.length===1)? e.key.toUpperCase() : null;
+  return t;
+}
+window.addEventListener('keydown', e=>{
+  // ignore typing in the search box
+  if(document.activeElement && document.activeElement.id==='searchBox') return;
+  // global: Enter to start
+  if(!running && (e.key==='Enter')){ const tv=$('view-train'); if(tv.classList.contains('show')){ startDrill(); e.preventDefault(); return; } }
+  if(!running || !answering) return;
+  // pure modifier press → wait
+  if(['Control','Shift','Alt','Meta'].includes(e.key)){ reflectLiveMods(e); return; }
+  const tok=codeToToken(e);
+  if(!tok.main) return;
+  e.preventDefault();
+  pressVis(tok.main);
+  handleAnswer(tok);
+});
+function reflectLiveMods(e){
+  modToggle={Ctrl:e.ctrlKey,Shift:e.shiftKey,Alt:e.altKey};
+  refreshKbdHint();
+}
+
+/* ============================================================
+   RANK / XP
+   ============================================================ */
+function currentRank(){
+  let r=RANKS[0];
+  for(const x of RANKS){ if(S.xp>=x.xp) r=x; }
+  return r;
+}
+function nextRank(){
+  const cur=currentRank();
+  const i=RANKS.indexOf(cur);
+  return i<RANKS.length-1? RANKS[i+1] : null;
+}
+function updateRankChip(){
+  const r=currentRank();
+  $('rankLbl').textContent=r.n;
+  $('rankChip').querySelector('.ico').textContent=r.ico;
+}
+function onRankUp(name){
+  sfxRank(); shardBurst(40);
+  updateRankChip();
+  const r=RANKS.find(x=>x.n===name);
+  showToast(r?r.ico:'🎖️', "Rank up — "+name+"!", "Your mastery grows. Press on, commander.");
+}
+
+/* ============================================================
+   CODEX
+   ============================================================ */
+let codexFilter="All";
+function buildCodexFilters(){
+  const wrap=$('codexFilters');
+  wrap.innerHTML = `<div class="fchip active" data-f="All" onclick="setCodexFilter('All')">All</div>` +
+    CATS.map(c=>`<div class="fchip" data-f="${c}" onclick="setCodexFilter('${c}')">${CAT_ICON[c]} ${c}</div>`).join('');
+}
+function setCodexFilter(f){ codexFilter=f; document.querySelectorAll('#codexFilters .fchip').forEach(c=>c.classList.toggle('active',c.dataset.f===f)); renderCodex(); }
+function renderCodex(){
+  const q=($('searchBox').value||"").trim().toLowerCase();
+  const list=$('codexList');
+  const cats = codexFilter==="All"? CATS : [codexFilter];
+  let html=''; let total=0;
+  cats.forEach(cat=>{
+    let items=HOTKEYS.filter(h=>h.cat===cat);
+    if(q) items=items.filter(h=> h.a.toLowerCase().includes(q) || h.d.toLowerCase().includes(q) || h.k.join(' ').toLowerCase().includes(q) || h.ctx.toLowerCase().includes(q));
+    if(!items.length) return;
+    total+=items.length;
+    html+=`<div class="catblock"><h3>${CAT_ICON[cat]} ${cat}<span class="ln"></span><span class="cnt">${items.length}</span></h3><div class="cards">`;
+    html+=items.map(h=>`
+      <div class="card">
+        <div class="keys">${keycapHTML(h.k,false)}</div>
+        <div class="body">
+          <div class="t">${h.a}</div>
+          <div class="d">${h.d}</div>
+          ${h.ctx&&h.ctx!=="Anywhere"?`<div class="mret">▸ ${h.ctx}</div>`:''}
+        </div>
+      </div>`).join('');
+    html+=`</div></div>`;
+  });
+  list.innerHTML = total? html : `<div class="nores">No bindings match “${q}”. Try “idle”, “stance”, or “town center”.</div>`;
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+function renderStats(){
+  const r=currentRank(), nx=nextRank();
+  $('statRank').textContent=r.n;
+  $('medal').textContent=r.ico;
+  const acc = S.totalAttempts? Math.round(S.totalCorrect/S.totalAttempts*100) : null;
+  const avg = S.reactCount? Math.round(S.totalReactMs/S.reactCount) : null;
+  $('tDrills').textContent=S.totalAttempts;
+  $('tAcc').textContent = acc!=null? acc+'%':'—';
+  $('tBest').textContent=S.bestStreak;
+  $('tReact').textContent = avg!=null? avg+'ms':'—';
+  const masteredCount=Object.keys(S.mastered).length;
+  const drillTotal=HOTKEYS.filter(h=>h.drill).length;
+  $('tMastered').textContent=masteredCount+'/'+drillTotal;
+
+  if(nx){
+    const span=nx.xp-r.xp, into=S.xp-r.xp;
+    const pct=Math.max(0,Math.min(100, Math.round(into/span*100)));
+    $('xpFill').style.width=pct+'%';
+    $('xpNow').textContent=S.xp+' XP';
+    $('xpNext').textContent=nx.xp+' XP → '+nx.n;
+    $('statNext').textContent=(nx.xp-S.xp)+' XP until '+nx.n+'.';
+  } else {
+    $('xpFill').style.width='100%';
+    $('xpNow').textContent=S.xp+' XP';
+    $('xpNext').textContent='Max rank';
+    $('statNext').textContent='You have conquered the keyboard. 👑';
+  }
+
+  // mastery rows
+  const rows=$('masteryRows');
+  rows.innerHTML = CATS.map(c=>{
+    const p=S.perCat[c]; const pct=p.att? Math.round(p.cor/p.att*100):0;
+    const col = pct>=85?'linear-gradient(90deg,#3fa85a,#7ee098)': pct>=55?'linear-gradient(90deg,#c79a3b,#ffdf91)': p.att? 'linear-gradient(90deg,#9a3b2e,#e06155)':'rgba(120,110,90,.3)';
+    const label = p.att? pct+'%' : '—';
+    return `<div class="mrow"><div class="name">${CAT_ICON[c]} ${c}</div>
+      <div class="bar"><i style="width:${p.att?pct:0}%;background:${col}"></i></div>
+      <div class="pct">${label}</div></div>`;
+  }).join('');
+}
+function resetAll(){
+  if(!confirm("Reset all progress, ranks, and stats? This cannot be undone.")) return;
+  const snd=S.sound; S=defaultState(); S.sound=snd; save();
+  sess={score:0,streak:0,att:0,cor:0,reactMs:0,reactN:0};
+  updateSessStats(); updateRankChip(); renderStats();
+  showToast('🧹','Progress reset','Back to the Dark Age. Rebuild your empire.');
+}
+
+/* ============================================================
+   FX — shards + toast
+   ============================================================ */
+function shardBurst(n){
+  const cx=window.innerWidth/2, cy=window.innerHeight*0.42;
+  const cols=['#ffdf91','#e8c372','#c0392b','#7ee098','#fff3d6'];
+  for(let i=0;i<n;i++){
+    const s=document.createElement('div'); s.className='shard';
+    s.style.background=cols[i%cols.length];
+    s.style.left=cx+'px'; s.style.top=cy+'px';
+    document.body.appendChild(s);
+    const ang=Math.random()*Math.PI*2, vel=120+Math.random()*260;
+    const dx=Math.cos(ang)*vel, dy=Math.sin(ang)*vel-120;
+    const rot=(Math.random()*720-360);
+    s.animate([
+      {transform:`translate(0,0) rotate(0deg)`,opacity:1},
+      {transform:`translate(${dx}px,${dy+260}px) rotate(${rot}deg)`,opacity:0}
+    ],{duration:900+Math.random()*500,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=()=>s.remove();
+  }
+}
+let toastT=null;
+function showToast(ico,tt,ts){
+  $('toastIco').textContent=ico; $('toastTt').textContent=tt; $('toastTs').textContent=ts;
+  const el=$('toast'); el.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),3200);
+}
+
+/* ============================================================
+   SOUND TOGGLE
+   ============================================================ */
+function toggleSound(){
+  S.sound=!S.sound; save();
+  $('soundBtn').classList.toggle('on',S.sound);
+  if(S.sound){ audio(); sfxGood(); }
+}
+
+/* ============================================================
+   EMBER BACKGROUND
+   ============================================================ */
+(function ember(){
+  const c=$('ember'), x=c.getContext('2d');
+  let w,h,parts=[];
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; }
+  resize(); addEventListener('resize',resize);
+  const N = reduce?0 : Math.min(70, Math.round(innerWidth/22));
+  for(let i=0;i<N;i++) parts.push(spawn());
+  function spawn(){ return {x:Math.random()*innerWidth, y:innerHeight+Math.random()*innerHeight, r:.6+Math.random()*2.4, s:.2+Math.random()*.9, a:.15+Math.random()*.5, drift:(Math.random()-.5)*.4, hue:Math.random()<.5?42:24}; }
+  function frame(){
+    x.clearRect(0,0,w,h);
+    for(const p of parts){
+      p.y-=p.s; p.x+=p.drift+Math.sin(p.y*0.01)*0.25;
+      if(p.y< -10){ Object.assign(p,spawn(), {y:h+10}); }
+      const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+      g.addColorStop(0,`hsla(${p.hue},90%,62%,${p.a})`);
+      g.addColorStop(1,`hsla(${p.hue},90%,55%,0)`);
+      x.fillStyle=g; x.beginPath(); x.arc(p.x,p.y,p.r*3,0,7); x.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  if(N>0) frame();
+})();
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init(){
+  buildCatSelect();
+  buildCodexFilters();
+  renderCodex();
+  renderKbd();
+  updateSessStats();
+  updateRankChip();
+  $('soundBtn').classList.toggle('on',S.sound);
+}
+init();
+</script>
+</body>
+</html>
