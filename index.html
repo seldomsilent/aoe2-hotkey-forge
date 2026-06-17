@@ -202,6 +202,10 @@ nav.tabs button.active{color:#1a1408;background:linear-gradient(180deg,var(--gol
 footer{position:relative;z-index:2;text-align:center;padding:30px 22px 50px;color:var(--ink-faint);font-size:12px;line-height:1.7}
 footer a{color:var(--gold-deep);text-decoration:none}
 footer a:hover{color:var(--gold-bright)}
+.dedication{display:flex;width:fit-content;align-items:center;gap:9px;font-family:'Cinzel',serif;font-size:13.5px;letter-spacing:.6px;color:var(--ink-dim);margin:4px auto 2px;padding:9px 20px;border-radius:999px;background:linear-gradient(180deg,rgba(40,30,16,.6),rgba(20,15,8,.4));border:1px solid var(--stroke)}
+.dedication b{color:var(--gold-bright);font-weight:700}
+.dedication .heart{color:var(--crimson-soft);font-size:14px;display:inline-block;animation:beat 1.6s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(224,97,85,.6))}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
 .disclaimer{max-width:680px;margin:14px auto 0;font-size:11px;color:#5e5644;line-height:1.6}
 .shard{position:fixed;width:9px;height:9px;z-index:55;pointer-events:none;border-radius:2px}
 
@@ -363,7 +367,8 @@ footer a:hover{color:var(--gold-bright)}
 </div>
 
 <footer>
-  <div>⚔️ <b style="color:var(--gold-deep)">Hotkey Forge</b> — a training tool for Age of Empires II: Definitive Edition.</div>
+  <div class="dedication">Forged with <span class="heart">♥</span> for <b>Alberta</b>, <b>Ross</b> &amp; <b>Sam</b></div>
+  <div style="margin-top:12px">⚔️ <b style="color:var(--gold-deep)">Hotkey Forge</b> — a training tool for Age of Empires II: Definitive Edition.</div>
   <div class="disclaimer">
     Bindings reflect AoE II:DE <b>default &amp; competitive-standard</b> hotkeys. Advanced building commands follow the <b>Grid layout</b>, where each key maps to a button's position on the command card (the exact unit at a position can vary by civilisation). Your in-game config is fully customisable under <i>Options → Hotkeys</i>. Unit, building &amp; tech icons © Microsoft / Forgotten Empires, used here for educational reference. Not affiliated with or endorsed by Microsoft, Xbox Game Studios, or Forgotten Empires.
   </div>
