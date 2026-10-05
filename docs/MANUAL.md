@@ -4,6 +4,16 @@
 
 Hotkey Forge is a single-page Age of Empires II hotkey trainer. It runs in your browser and stores progress in that browser. It has no sign-in, server account or connection to the game. The built-in bindings are practice material; check your game's own hotkey configuration when they differ.
 
+## Contents
+
+- [1. Open the trainer](#1-open-the-trainer)
+- [2. Practise on Train](#2-practise-on-train)
+- [3. Unlock Full 100 and understand scoring](#3-unlock-full-100-and-understand-scoring)
+- [4. Look up a binding in Codex](#4-look-up-a-binding-in-codex)
+- [5. Review or reset Stats](#5-review-or-reset-stats)
+- [6. Troubleshoot and maintain the app](#6-troubleshoot-and-maintain-the-app)
+- [Maintenance record](#maintenance-record)
+
 ## 1. Open the trainer
 
 **Where:** [Hotkey Forge](https://seldomsilent.github.io/aoe2-hotkey-forge/) or the repository's `index.html` with its adjacent `assets` folder.
