@@ -1,5 +1,7 @@
 # ⚔️ Hotkey Forge
 
+**Project manual:** [Read the manual](docs/MANUAL.md) · [Release notes](docs/RELEASES.md) · [Contributor instructions](AGENTS.md)
+
 A hyper-slick, zero-dependency web app for mastering **Age of Empires II: Definitive Edition** hotkeys.
 
 **Live:** https://seldomsilent.github.io/aoe2-hotkey-forge/
